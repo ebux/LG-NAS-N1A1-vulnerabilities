@@ -22,9 +22,9 @@ Familycast is a service running on top of the NAS functionality. According to LG
 Although Familycast functionality requires the user to log in, most of the PHP scripts in the Familycast service under the `/familycast/interface/php/` folder do not perform any session checking. Thus, every file shared via this service can be accessed remotely and other vulnerabilities can be exploited without authentication.
 
 ### SQL injection in profile request ###
-User profiles – containing various IDs and relationship types – are requested by the Familycast manager after login. To obtain the profile data, the `proc_type` (`=family_get`) and `id` parameters should be sent in a `POST` request. 
+User profiles - containing various IDs and relationship types - are requested by the Familycast manager after login. To obtain the profile data, the `proc_type` (`=family_get`) and `id` parameters should be sent in a `POST` request. 
 
-![image](https://github.com/ebux/LG-NAS-N1A1-vulnerabilities/LG-NAS-N1A1-vulnerabilities/familycast_sqli.png)
+![image](https://github.com/ebux/LG-NAS-N1A1-vulnerabilities/familycast_sqli.png)
  
 From these parameters, the `id` parameter is used in an SQL statement without sanitization, thus SQL injection is possible. By exploiting this SQL injection, an attacker can obtain the user names and password hashes of the Familycast service.
 
@@ -33,18 +33,18 @@ We note that this SQL injection is only an easily-exploited example. Since the a
 ### Arbitrary file up- and download with directory traversal ###
 The Familycast service contained a hidden simple upload form, providing an easy way to upload or download any files to or from its folder.  
 
-![image](https://github.com/ebux/LG-NAS-N1A1-vulnerabilities/LG-NAS-N1A1-vulnerabilities/familycast_upload.png)
+![image](https://github.com/ebux/LG-NAS-N1A1-vulnerabilities/familycast_upload.png)
 
 The `upload.html` file uses the `file.php` script to perform file copy, download, upload, retrieve, modify, move and delete operations. These operations also support multiple files and directories and use the file_name `POST` parameter without any kind of input validation. 
 
-![image](https://github.com/ebux/LG-NAS-N1A1-vulnerabilities/LG-NAS-N1A1-vulnerabilities/familycast_dir_traversal.png)
+![image](https://github.com/ebux/LG-NAS-N1A1-vulnerabilities/familycast_dir_traversal.png)
 
 The missing parameter verification leads to directory traversal, ultimately allowing access to any system file via this service.
 
 ### Sensitive information in log files ###
 The NAS logs every event into the `/var/tmp/ui_script.log` file along with the event parameters. The login events are also inserted into this file along with the actual password hash. Since the NAS login process (different from the Familycast login process) requires sending the password hash, the parameter from the log file can be used to login to the NAS without reversing the plain text password.
 
-![image](https://github.com/ebux/LG-NAS-N1A1-vulnerabilities/LG-NAS-N1A1-vulnerabilities/familycast_log.png)
+![image](https://github.com/ebux/LG-NAS-N1A1-vulnerabilities/familycast_log.png)
  
 ## POC ##
 A POC script is available to demonstrate the following problems:
@@ -53,7 +53,7 @@ A POC script is available to demonstrate the following problems:
 - SQL Injection in Familycast
 - Sensitive information in log files
 
-A video demonstration presenting the above problems – and how they can be combined to obtain admin access to the NAS – is also available.
+A [video demonstration](http://youtube.com/valami) presenting the above problems - and how they can be combined to obtain admin access to the NAS - is also available.
 
 ## Recommendations ##
 Update the firmware to the latest version [`firmware-N1A1_10124rfke.zip`](http://www.lg.com/us/support-product/lg-N1A1DD1). We also highly recommend not exposing the web interface of LG N1A1 NAS devices to the internet.
