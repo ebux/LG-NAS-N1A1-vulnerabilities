@@ -53,7 +53,7 @@ A POC script is available to demonstrate the following problems:
 - SQL Injection in Familycast
 - Sensitive information in log files
 
-A [video demonstration](http://youtube.com/valami) presenting the above problems - and how they can be combined to obtain admin access to the NAS - is also available.
+A [video demonstration](https://youtu.be/ppMOj-eK81Y) presenting the above problems - and how they can be combined to obtain admin access to the NAS - is also available.
 
 ## Recommendations ##
 Update the firmware to the latest version [`firmware-N1A1_10124rfke.zip`](http://www.lg.com/us/support-product/lg-N1A1DD1). We also highly recommend not exposing the web interface of LG N1A1 NAS devices to the internet.
@@ -66,6 +66,6 @@ SEARCH-LAB Ltd. tried to responsibly report these vulnerabilities to LG, but we 
 - 2015-10-02: Finally we found the right contact and LG updated the firmware to version 10124
 
 ## Links ##
-- [Search-lab advisory](http://www.search-lab.hu/about-us/news/LG-NAS)
-- [POC video](http://youtube.com/valami)
+- [Search-lab advisory](http://www.search-lab.hu/advisories/113-secadv-20160519)
+- [POC video](https://youtu.be/ppMOj-eK81Y)
 
